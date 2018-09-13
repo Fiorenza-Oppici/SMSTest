@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SMSTest</string>
+    <string name="server_url">http://mysite:3000</string>
+    <string name="button_save">Save</string>
+</resources>
