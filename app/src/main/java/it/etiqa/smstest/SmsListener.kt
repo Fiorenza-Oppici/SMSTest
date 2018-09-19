@@ -12,7 +12,7 @@ class SmsListener : BroadcastReceiver() {
     val TAG = "SMSActivity"
 
     override fun onReceive(context: Context, intent: Intent) {
-        Log.i(TAG,"_____________________________________________________________")
+        Log.i(TAG,"Sms received!________________________________________")
         if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
             for (smsMessage: SmsMessage in Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
                 val messageBody = smsMessage.messageBody

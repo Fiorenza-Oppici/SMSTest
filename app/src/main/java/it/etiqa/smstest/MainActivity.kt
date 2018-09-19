@@ -3,14 +3,12 @@ package it.etiqa.smstest
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRationale
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.view.View
 import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
@@ -61,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun save (view: View) {
+    fun save () {
         Log.i(TAG, "Saving Preferences")
         val serverUrlInput = findViewById<EditText>(R.id.serverUrl)
         val serverUrl = serverUrlInput.text.toString()
@@ -71,5 +69,6 @@ class MainActivity : AppCompatActivity() {
             putString(getString(R.string.server_url), serverUrl)
             commit()
         }
+
     }
 }

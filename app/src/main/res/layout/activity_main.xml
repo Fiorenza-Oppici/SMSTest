@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="@string/server_url"
         android:inputType="textPersonName"
@@ -32,5 +32,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/serverUrl" />
+
+    <Switch
+        android:id="@+id/activateSend"
+        android:layout_width="0dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/activate_text"
+        android:textColorLink="@color/colorAccent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="306dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="69dp" />
 
 </android.support.constraint.ConstraintLayout>
