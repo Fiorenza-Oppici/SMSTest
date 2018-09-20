@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadServerUrl() {
-        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        val sharedPref = getSharedPreferences(TAG, Context.MODE_PRIVATE) ?: return
         val defaultValue = resources.getString(R.string.server_url_placeholder)
         val serverUrl = sharedPref.getString(getString(R.string.server_url_label), defaultValue)
 
@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         Log.i(TAG, "Saving Preferences - target server")
         val serverUrl = serverUrlInput.text.toString()
 
-        val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
+        val sharedPref = getSharedPreferences(TAG, Context.MODE_PRIVATE) ?: return
         with (sharedPref.edit()) {
             putString(getString(R.string.server_url_label), serverUrl)
             commit()
