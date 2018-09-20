@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         checkPermissions()
-        checkToggle()
+        configureSwitch()
         loadServerUrl()
     }
 
-    fun checkPermissions () {
+    private fun checkPermissions () {
         Log.i(TAG, "_____________________________________________________________")
 
         // Here, thisActivity is the current activity
@@ -50,33 +50,40 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun checkToggle () {
+    private fun configureSwitch () {
+        val sharedPref = getSharedPreferences(TAG, Context.MODE_PRIVATE)
+        val activateLabel = getString(R.string.activated_state_label)
+
+        // remember status from sharedproperties
+        activateSend.isChecked = sharedPref.getBoolean(activateLabel, false)
+
         activateSend.setOnCheckedChangeListener { _, isChecked -> run {
-                val sharedPref = getPreferences(Context.MODE_PRIVATE)
+
             with (sharedPref.edit()) {
-                putBoolean("activated_state", activateSend.isChecked)
+                    putBoolean(activateLabel, isChecked)
+                commit()
                 }
             }
         }
     }
 
-    fun loadServerUrl() {
+    private fun loadServerUrl() {
         val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
-        val defaultValue = resources.getString(R.string.server_url)
-        val serverUrl = sharedPref.getString(getString(R.string.server_url), defaultValue)
+        val defaultValue = resources.getString(R.string.server_url_placeholder)
+        val serverUrl = sharedPref.getString(getString(R.string.server_url_label), defaultValue)
 
         if (serverUrl != defaultValue) {
             serverUrlInput.setText(serverUrl)
         }
     }
 
-    fun save (view: View) {
-        Log.i(TAG, "Saving Preferences")
+    fun saveTargetUrl (view: View) {
+        Log.i(TAG, "Saving Preferences - target server")
         val serverUrl = serverUrlInput.text.toString()
 
         val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
         with (sharedPref.edit()) {
-            putString(getString(R.string.server_url), serverUrl)
+            putString(getString(R.string.server_url_label), serverUrl)
             commit()
         }
 

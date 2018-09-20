@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">SMSTest</string>
-    <string name="server_url">http://mysite:3000</string>
+    <string name="server_url_placeholder">http://mysite:3000</string>
     <string name="button_save">Save</string>
     <string name="activate_text">Start transferring SMSs</string>
-    <bool name="activated_state">false</bool>
+    <string name="activated_state_label">activated_state</string>
+    <string name="server_url_label">server_url</string>
 </resources>

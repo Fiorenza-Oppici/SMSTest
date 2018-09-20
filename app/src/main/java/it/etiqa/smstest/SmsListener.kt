@@ -12,13 +12,22 @@ class SmsListener : BroadcastReceiver() {
     val TAG = "SMSActivity"
 
     override fun onReceive(context: Context, intent: Intent) {
-        val recording = context.getSharedPreferences("activated_state", Context.MODE_PRIVATE) ?: false
+        val sharedPref = context.getSharedPreferences (TAG, Context.MODE_PRIVATE) ?: return
+
+        val recording = sharedPref.getBoolean(context.getString(R.string.activated_state_label), false)
+        val targetUrl = sharedPref.getString(context.getString(R.string.server_url_label), "")
+
         Log.i(TAG,"Sms received!________________________________________")
-        if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
-            for (smsMessage: SmsMessage in Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
-                val messageBody = smsMessage.messageBody
-                Log.i(TAG,messageBody)
+        if (recording) {
+            if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
+                for (smsMessage: SmsMessage in Telephony.Sms.Intents.getMessagesFromIntent(intent)) {
+                    val messageBody = smsMessage.messageBody
+
+                    Log.i(TAG, messageBody)
+                }
             }
+        } else {
+            Log.i(TAG, "Message received - but transferral has not been enabled!")
         }
     }
 }
