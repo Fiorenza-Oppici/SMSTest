@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat.shouldShowRequestPermissionRational
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun save () {
+    fun save (view: View) {
         Log.i(TAG, "Saving Preferences")
         val serverUrl = serverUrlInput.text.toString()
 
