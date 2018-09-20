@@ -12,6 +12,7 @@ class SmsListener : BroadcastReceiver() {
     val TAG = "SMSActivity"
 
     override fun onReceive(context: Context, intent: Intent) {
+        val recording = context.getSharedPreferences("activated_state", Context.MODE_PRIVATE) ?: false
         Log.i(TAG,"Sms received!________________________________________")
         if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.getAction())) {
             for (smsMessage: SmsMessage in Telephony.Sms.Intents.getMessagesFromIntent(intent)) {

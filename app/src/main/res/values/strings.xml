@@ -3,4 +3,5 @@
     <string name="server_url">http://mysite:3000</string>
     <string name="button_save">Save</string>
     <string name="activate_text">Start transferring SMSs</string>
+    <bool name="activated_state">false</bool>
 </resources>
