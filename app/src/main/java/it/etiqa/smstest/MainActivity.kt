@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import it.etiqa.smstest.R.id.activateSend
+import it.etiqa.smstest.R.id.serverUrlInput
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
