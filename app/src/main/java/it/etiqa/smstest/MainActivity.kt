@@ -4,14 +4,12 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
-import android.view.View
-import it.etiqa.smstest.R.id.activateSend
-import it.etiqa.smstest.R.id.serverUrlInput
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -81,7 +79,7 @@ class MainActivity : AppCompatActivity() {
 
     fun saveTargetUrl (view: View) {
         Log.i(TAG, "Saving Preferences - target server")
-        val serverUrl = serverUrlInput.text.toString()
+        val serverUrl =  if (serverUrlInput.text.toString()?.length != 0)  serverUrlInput.text.toString() else resources.getString(R.string.server_url_placeholder)
 
         val sharedPref = getSharedPreferences(TAG, Context.MODE_PRIVATE) ?: return
         with (sharedPref.edit()) {

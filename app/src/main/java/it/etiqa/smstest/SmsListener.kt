@@ -15,7 +15,7 @@ class SmsListener : BroadcastReceiver() {
         val sharedPref = context.getSharedPreferences (TAG, Context.MODE_PRIVATE) ?: return
 
         val recording = sharedPref.getBoolean(context.getString(R.string.activated_state_label), false)
-        val targetUrl = sharedPref.getString(context.getString(R.string.server_url_label), "")
+        val targetUrl = sharedPref.getString(context.getString(R.string.server_url_label), context.resources.getString(R.string.server_url_placeholder))
 
         Log.i(TAG,"Sms received!________________________________________")
         if (recording) {
