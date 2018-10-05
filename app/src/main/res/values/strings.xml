@@ -6,4 +6,5 @@
     <string name="activate_text">Start transferring SMSs</string>
     <string name="activated_state_label">activated_state</string>
     <string name="server_url_label">server_url</string>
+    <string name="filter_label">Filter by tags:</string>
 </resources>
