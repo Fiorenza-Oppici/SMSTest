@@ -92,15 +92,35 @@
         app:layout_constraintTop_toBottomOf="@+id/activateSend" />
 
     <EditText
-        android:id="@+id/editText2"
-        android:layout_width="0dp"
+        android:id="@+id/tagInput"
+        android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:inputType="text"
+        android:text=""
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/saveTagBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:onClick="addTagView"
+        android:text="@string/button_save"
+        app:layout_constraintStart_toEndOf="@+id/tagInput"
+        app:layout_constraintTop_toBottomOf="@+id/activateSend" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/tagsList"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/tagInput" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

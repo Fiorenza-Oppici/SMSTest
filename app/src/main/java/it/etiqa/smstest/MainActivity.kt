@@ -10,7 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale
 import androidx.core.content.ContextCompat
+import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_main.*
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         checkPermissions()
         configureSwitch()
         loadServerUrl()
+        bindTagButton()
+        populateTags()
     }
 
     private fun checkPermissions () {
@@ -79,13 +84,77 @@ class MainActivity : AppCompatActivity() {
 
     fun saveTargetUrl (view: View) {
         Log.i(TAG, "Saving Preferences - target server")
-        val serverUrl =  if (serverUrlInput.text.toString()?.length != 0)  serverUrlInput.text.toString() else resources.getString(R.string.server_url_placeholder)
+        val serverUrl =  if (serverUrlInput.text.toString().isNotEmpty())  serverUrlInput.text.toString() else resources.getString(R.string.server_url_placeholder)
 
         val sharedPref = getSharedPreferences(TAG, Context.MODE_PRIVATE) ?: return
         with (sharedPref.edit()) {
             putString(getString(R.string.server_url_label), serverUrl)
             commit()
         }
+
+    }
+
+    private fun bindTagButton() {
+        saveTagBtn.setOnClickListener() {
+            addTagView(null)
+        }
+    }
+
+    private fun populateTags () {
+        val sp = getSharedPreferences(TAG, Context.MODE_PRIVATE) ?: return
+        val  tagSet = sp.getStringSet("filter_tags", HashSet<String>())
+
+        for (str in tagSet) {
+            addTagView(str)
+        }
+
+
+    }
+
+    fun addTagView ( tagStr : String?) {
+        val newTag = tagStr?: tagInput.text.toString()
+
+        if (newTag.isNotEmpty()) {
+            var chip = Chip(tagsList.context)
+            chip.text = newTag
+            chip.isClickable = true
+            chip.isCloseIconEnabled = true
+
+            chip.setOnCloseIconClickListener {
+                tagsList.removeView(chip)
+                removeTag(newTag)
+            }
+
+            tagsList.addView(chip)
+            addTag(newTag)
+            tagInput.setTextKeepState("")
+        }
+
+    }
+
+    private fun addTag(newTag: String) {
+        val sp = getSharedPreferences(TAG, Context.MODE_PRIVATE) ?: return
+        with (sp.edit()) {
+            var newSet = sp.getStringSet("filter_tags", HashSet<String>()).toHashSet()
+            newSet.add(newTag)
+            Log.i(TAG, "Saving Preferences - tags")
+             putStringSet("filter_tags", newSet)
+            commit()
+        }
+
+    }
+
+    private fun removeTag(newTag: String) {
+        val sp = getSharedPreferences(TAG, Context.MODE_PRIVATE) ?: return
+        with (sp.edit()) {
+            var newSet = sp.getStringSet("filter_tags", HashSet<String>()).toHashSet()
+            newSet.remove(newTag)
+            Log.i(TAG, "Saving Preferences - tags")
+            putStringSet("filter_tags", newSet)
+            commit()
+        }
+
+
 
     }
 }
