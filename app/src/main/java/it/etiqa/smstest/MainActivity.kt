@@ -108,25 +108,27 @@ class MainActivity : AppCompatActivity() {
             addTagView(str)
         }
 
-
     }
 
     fun addTagView ( tagStr : String?) {
         val newTag = tagStr?: tagInput.text.toString()
 
         if (newTag.isNotEmpty()) {
+            for (substr in newTag.split(" ")) {
             var chip = Chip(tagsList.context)
-            chip.text = newTag
+            chip.text = substr
             chip.isClickable = true
             chip.isCloseIconEnabled = true
 
             chip.setOnCloseIconClickListener {
                 tagsList.removeView(chip)
-                removeTag(newTag)
+                removeTag(substr)
             }
 
             tagsList.addView(chip)
-            addTag(newTag)
+            addTag(substr)
+            }
+
             tagInput.setTextKeepState("")
         }
 
@@ -153,8 +155,6 @@ class MainActivity : AppCompatActivity() {
             putStringSet("filter_tags", newSet)
             commit()
         }
-
-
 
     }
 }
