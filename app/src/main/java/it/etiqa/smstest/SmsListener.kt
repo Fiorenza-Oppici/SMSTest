@@ -36,9 +36,10 @@ class SmsListener : BroadcastReceiver() {
     }
 
     private fun checkForTag(message: String, tagsList: HashSet<String>) :  Boolean {
-        val containsTag = false
+        val containsTag = tagsList.size == 0
+        var lowerMsg = message.toLowerCase()
         for (str in tagsList) {
-            if (message.contains(str.toLowerCase())) {
+            if (lowerMsg.contains(str.toLowerCase())) {
                 return true
             }
         }
