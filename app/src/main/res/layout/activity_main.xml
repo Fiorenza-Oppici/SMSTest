@@ -93,12 +93,13 @@
 
     <EditText
         android:id="@+id/tagInput"
-        android:layout_width="243dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="text"
         android:text=""
+        app:layout_constraintEnd_toStartOf="@+id/saveTagBtn"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -107,8 +108,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/button_save"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tagInput"
         app:layout_constraintTop_toBottomOf="@+id/activateSend" />
 
